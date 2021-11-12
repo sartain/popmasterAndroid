@@ -11,4 +11,24 @@ class MainActivityRobot {
         Espresso.onView(withId(R.id.title))
             .check(ViewAssertions.matches(ViewMatchers.withText("Popmaster")))
     }
+
+    fun scoreAppears() {
+        Espresso.onView(withId(R.id.score))
+            .check(ViewAssertions.matches(ViewMatchers.withId(R.id.score)))
+    }
+
+    fun questionAppears() {
+        Espresso.onView(withId(R.id.question))
+            .check(ViewAssertions.matches(ViewMatchers.withId(R.id.question)))
+    }
+
+    fun buttonForWrongAnswerAppears() {
+        Espresso.onView(withId(R.id.incorrectButton))
+            .check(ViewAssertions.matches(ViewMatchers.withId(R.id.incorrectButton)))
+    }
+
+    fun buttonForRightAnswerAppears() {
+        Espresso.onView(withId(R.id.correctButton))
+            .check(ViewAssertions.matches(ViewMatchers.withId(R.id.correctButton)))
+    }
 }

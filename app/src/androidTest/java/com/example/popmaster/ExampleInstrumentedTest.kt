@@ -31,5 +31,9 @@ class ExampleInstrumentedTest {
     @Test
     fun mainTitleAppears() {
         mainActivityRobot.gameTitleAppears()
+        mainActivityRobot.scoreAppears()
+        mainActivityRobot.questionAppears()
+        mainActivityRobot.buttonForWrongAnswerAppears()
+        mainActivityRobot.buttonForRightAnswerAppears()
     }
 }
