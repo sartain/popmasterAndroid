@@ -31,4 +31,13 @@ class MainActivityRobot {
         Espresso.onView(withId(R.id.correctButton))
             .check(ViewAssertions.matches(ViewMatchers.withId(R.id.correctButton)))
     }
+
+    fun textForWrongAnswerButtonUpdated() {
+        Espresso.onView(withId(R.id.correctButton))
+            .check(ViewAssertions.matches(ViewMatchers.withText("Correct")))
+    }
+    fun textForRightAnswerButtonUpdated() {
+        Espresso.onView(withId(R.id.incorrectButton))
+            .check(ViewAssertions.matches(ViewMatchers.withText("Incorrect")))
+    }
 }

@@ -39,6 +39,7 @@
         app:layout_constraintLeft_toLeftOf="@id/score"
         app:layout_constraintTop_toBottomOf="@id/score"
         app:layout_constraintBottom_toTopOf="@id/score"
+        tools:text="Wrong"
         />
     <Button
         android:id="@+id/correctButton"
@@ -47,5 +48,6 @@
         app:layout_constraintRight_toRightOf="@id/question"
         app:layout_constraintTop_toBottomOf="@id/score"
         app:layout_constraintBottom_toTopOf="@id/score"
+        tools:text="Right"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

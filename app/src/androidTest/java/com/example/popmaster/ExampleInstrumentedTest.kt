@@ -36,4 +36,10 @@ class ExampleInstrumentedTest {
         mainActivityRobot.buttonForWrongAnswerAppears()
         mainActivityRobot.buttonForRightAnswerAppears()
     }
+
+    @Test
+    fun bindingAllowsTextOverwrite() {
+        mainActivityRobot.textForWrongAnswerButtonUpdated()
+        mainActivityRobot.textForRightAnswerButtonUpdated()
+    }
 }
