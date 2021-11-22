@@ -42,4 +42,7 @@ class ExampleInstrumentedTest {
         mainActivityRobot.textForWrongAnswerButtonUpdated()
         mainActivityRobot.textForRightAnswerButtonUpdated()
     }
+
+    //Test for clicking correct answer
+    //Test for clicking incorrect answer
 }

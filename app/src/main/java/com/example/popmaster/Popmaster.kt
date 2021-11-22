@@ -15,10 +15,16 @@ class Popmaster {
     }
 
     fun answerQuestion(correct: Boolean) {
-        if(correct) {
-            scorecard.updateCorrectAnswer(questionNo = currentQuestion)
+        if(currentQuestion <= 10) {
+            if (correct) {
+                scorecard.updateCorrectAnswer(questionNo = currentQuestion)
+            }
+            currentQuestion += 1
         }
-        currentQuestion += 1
+    }
+
+    fun getQuestion(): Int{
+        return currentQuestion
     }
 
     private fun reset() {

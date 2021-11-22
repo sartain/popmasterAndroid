@@ -42,7 +42,16 @@ class PopmasterTest {
         game.answerQuestion(true)
         assertEquals(6, game.totalScore())
     }
-    
+
+    @Test
+    fun `Score cannot be larger than 39` () {
+        val game = Popmaster()
+        for( i in 1..20) {
+            game.answerQuestion(true)
+        }
+        assertEquals(39, game.totalScore())
+    }
+
     @Test
     fun `Score is 39 if all questions correct` () {
         val game = Popmaster()
