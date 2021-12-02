@@ -21,22 +21,27 @@ class MainActivity : AppCompatActivity() {
     val controller = Popmaster()
 
     fun questionListener(binding: ActivityMainBinding) {
-        binding.correctButton.setOnClickListener { controller.answerQuestion(true)
-            updateQuestionString(binding)
-            updateScoreString(binding)
+        binding.correctButton.setOnClickListener {
+            controller.answerQuestion(true)
+            updateGameInfo(binding)
         }
-        binding.incorrectButton.setOnClickListener { controller.answerQuestion(false)
-            updateQuestionString(binding)
-            updateScoreString(binding)
+        binding.incorrectButton.setOnClickListener {
+            controller.answerQuestion(false)
+            updateGameInfo(binding)
         }
+    }
+
+    fun updateGameInfo(binding: ActivityMainBinding) {
+        updateScoreString(binding)
+        updateQuestionString(binding)
     }
 
     fun updateQuestionString(binding: ActivityMainBinding) {
-        binding.question.text = "Question: " + controller.getQuestion().toString()
+        binding.question.text = getString(R.string.question, controller.getQuestion())
     }
 
     fun updateScoreString(binding: ActivityMainBinding) {
-        binding.score.text = "Score: " + controller.totalScore().toString()
+        binding.score.text = getString(R.string.score, controller.totalScore())
     }
 
 }
