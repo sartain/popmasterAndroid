@@ -1,6 +1,7 @@
 package com.example.popmaster
 
 import androidx.test.espresso.Espresso
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
@@ -40,4 +41,19 @@ class MainActivityRobot {
         Espresso.onView(withId(R.id.incorrectButton))
             .check(ViewAssertions.matches(ViewMatchers.withText("Incorrect")))
     }
+
+    fun clickCorrectButton() {
+        R.id.correctButton.clickView()
+    }
+
+    fun checkScoreUpdated() {
+        Espresso.onView(withId(R.id.score))
+            .check(ViewAssertions.matches(ViewMatchers.withText("3")))
+    }
+
+    fun Int.clickView() {
+        Espresso.onView(withId(this))
+            .perform(ViewActions.click())
+    }
+
 }

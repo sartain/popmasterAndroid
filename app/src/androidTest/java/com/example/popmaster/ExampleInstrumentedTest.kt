@@ -30,22 +30,29 @@ class ExampleInstrumentedTest {
 
     @Test
     fun mainTitleAppears() {
-        mainActivityRobot.gameTitleAppears()
-        mainActivityRobot.scoreAppears()
-        mainActivityRobot.questionAppears()
-        mainActivityRobot.buttonForWrongAnswerAppears()
-        mainActivityRobot.buttonForRightAnswerAppears()
+        mainActivityRobot.apply {
+            gameTitleAppears()
+            scoreAppears()
+            questionAppears()
+            buttonForRightAnswerAppears()
+            buttonForWrongAnswerAppears()
+        }
     }
 
     @Test
     fun bindingAllowsTextOverwrite() {
-        mainActivityRobot.textForWrongAnswerButtonUpdated()
-        mainActivityRobot.textForRightAnswerButtonUpdated()
+        mainActivityRobot.apply {
+            textForWrongAnswerButtonUpdated()
+            textForRightAnswerButtonUpdated()
+        }
     }
 
     @Test
     fun correctUpdatesScore() {
-
+        mainActivityRobot.apply {
+            clickCorrectButton()
+            checkScoreUpdated()
+        }
     }
 
     //Test for clicking correct answer
