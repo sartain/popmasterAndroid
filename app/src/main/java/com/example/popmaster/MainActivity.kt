@@ -13,8 +13,8 @@ class MainActivity : AppCompatActivity() {
         //Can then access the binding values
         binding.correctButton.text = getString(R.string.correct)
         binding.incorrectButton.text = getString(R.string.incorrect)
-        binding.question.text = controller.getQuestion().toString()
-        binding.score.text = controller.totalScore().toString()
+        updateQuestionString(binding)
+        updateScoreString(binding)
         questionListener(binding)
         setContentView(binding.root)
     }
@@ -22,13 +22,21 @@ class MainActivity : AppCompatActivity() {
 
     fun questionListener(binding: ActivityMainBinding) {
         binding.correctButton.setOnClickListener { controller.answerQuestion(true)
-            binding.score.text = controller.totalScore().toString()
-            binding.question.text = controller.getQuestion().toString()
+            updateQuestionString(binding)
+            updateScoreString(binding)
         }
         binding.incorrectButton.setOnClickListener { controller.answerQuestion(false)
-            binding.score.text = controller.totalScore().toString()
-            binding.question.text = controller.getQuestion().toString()
+            updateQuestionString(binding)
+            updateScoreString(binding)
         }
+    }
+
+    fun updateQuestionString(binding: ActivityMainBinding) {
+        binding.question.text = "Question: " + controller.getQuestion().toString()
+    }
+
+    fun updateScoreString(binding: ActivityMainBinding) {
+        binding.score.text = "Score: " + controller.totalScore().toString()
     }
 
 }

@@ -55,6 +55,14 @@ class ExampleInstrumentedTest {
         }
     }
 
+    @Test
+    fun responseUpdatesQuestionNumber() {
+        mainActivityRobot.apply {
+            clickCorrectButton()
+            checkQuestionUpdated()
+        }
+    }
+
     //Test for clicking correct answer
     //Test for clicking incorrect answer
 }

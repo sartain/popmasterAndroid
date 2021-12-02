@@ -48,12 +48,18 @@ class MainActivityRobot {
 
     fun checkScoreUpdated() {
         Espresso.onView(withId(R.id.score))
-            .check(ViewAssertions.matches(ViewMatchers.withText("3")))
+            .check(ViewAssertions.matches(ViewMatchers.withText("Score: 3")))
     }
 
     fun Int.clickView() {
         Espresso.onView(withId(this))
             .perform(ViewActions.click())
     }
+
+    fun checkQuestionUpdated() {
+        Espresso.onView(withId(R.id.question))
+            .check(ViewAssertions.matches(ViewMatchers.withText("Question: 2")))
+    }
+
 
 }
