@@ -11,8 +11,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         //Can then access the binding values
-        binding.correctButton.text = "Correct"
-        binding.incorrectButton.text = "Incorrect"
+        binding.correctButton.text = getString(R.string.correct)
+        binding.incorrectButton.text = getString(R.string.incorrect)
         binding.question.text = controller.getQuestion().toString()
         binding.score.text = controller.totalScore().toString()
         questionListener(binding)

@@ -43,6 +43,11 @@ class ExampleInstrumentedTest {
         mainActivityRobot.textForRightAnswerButtonUpdated()
     }
 
+    @Test
+    fun correctUpdatesScore() {
+
+    }
+
     //Test for clicking correct answer
     //Test for clicking incorrect answer
 }
