@@ -1,9 +1,29 @@
 package com.example.popmaster
 
-class Popmaster {
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+
+
+class Popmaster : ViewModel() {
+    private var liveScoreData: MutableLiveData<Int> = MutableLiveData()
+    private var liveQuestionData: MutableLiveData<Int> = MutableLiveData()
     private val scorecard = Scorecard()
     private var currentQuestion = 1
     private val leaderboard = Leaderboard()
+
+    fun loadData() {
+        liveScoreData.value = scorecard.score
+        liveQuestionData.value = 0
+    }
+
+    fun getScore(): LiveData<Int> {
+        return liveScoreData
+    }
+
+    fun getQuestionLive(): LiveData<Int> {
+        return liveQuestionData
+    }
 
     fun totalScore(): Int {
         return scorecard.score
