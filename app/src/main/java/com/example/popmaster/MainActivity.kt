@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import com.example.popmaster.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -22,8 +23,16 @@ class MainActivity : AppCompatActivity() {
         })
         binding.correctButton.text = getString(R.string.correct)
         binding.incorrectButton.text = getString(R.string.incorrect)
+        questionListener(binding, viewModel)
         setContentView(binding.root)
     }
 
-
+    private fun questionListener(binding: ActivityMainBinding, viewModel : Popmaster) {
+        binding.correctButton.setOnClickListener {
+            viewModel.answerQuestion(true)
+        }
+        binding.incorrectButton.setOnClickListener {
+            viewModel.answerQuestion(false)
+        }
+    }
 }

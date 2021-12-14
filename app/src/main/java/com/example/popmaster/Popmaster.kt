@@ -34,20 +34,24 @@ class Popmaster : ViewModel() {
         reset()
     }
 
+    fun correctAnswer() {
+        scorecard.updateCorrectAnswer(currentQuestion)
+        liveScoreData.value = scorecard.score
+    }
+
+    fun moveToNextQuestion() {
+        currentQuestion += 1
+        liveQuestionData.value = currentQuestion
+    }
+
     fun answerQuestion(correct: Boolean) {
         if(currentQuestion <= 10) {
-            if (correct) {
-                scorecard.updateCorrectAnswer(currentQuestion)
-            }
+            if (correct)
+                correctAnswer()
             if(currentQuestion != 10)
-                currentQuestion += 1
+               moveToNextQuestion()
         }
     }
-
-    fun getQuestion(): Int{
-        return currentQuestion
-    }
-
     private fun reset() {
         if(currentQuestion > 10) {
             scorecard.reset()
