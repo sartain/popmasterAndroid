@@ -2,11 +2,7 @@ package com.example.popmaster
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import com.example.popmaster.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
