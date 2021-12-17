@@ -1,8 +1,13 @@
 package com.example.popmaster
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.Observer
+import io.mockk.mockk
 import org.junit.Test
 
 import org.junit.Assert.*
+import org.junit.Before
+import org.junit.Rule
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -20,8 +25,22 @@ ToDo
     -Add name to leaderboard at end with score = Done
  */
 
+//Two live data -> Consider as one view state
+//Fix issues in 'test'
+//Consider test class runner
 
-class PopmasterTest {
+class MainActivityViewModelTest {
+    val testSubject = MainActivityViewModel()
+    private val observer: Observer<Int> =
+        mockk(relaxed = true)
+
+    @Rule @JvmField
+    var instantExecutorRule = InstantTaskExecutorRule()
+    @Before
+    fun setupTest() {
+        testSubject.questionLiveData.observeForever(observer)
+    }
+
     @Test
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
@@ -29,62 +48,56 @@ class PopmasterTest {
 
     @Test
     fun `Score increased by 3 for correct answer` () {
-        val game = Popmaster()
-        game.answerQuestion(true)
-        assertEquals(3, game.totalScore())
+        testSubject.answerQuestion(true)
+        assertEquals(3, testSubject.scoreLiveData.value)
     }
 
     @Test
     fun `Score increased by 6 for correct bonus answer` () {
-        val game = Popmaster()
-        game.answerQuestion(false)
-        game.answerQuestion(false)
-        game.answerQuestion(true)
-        assertEquals(6, game.totalScore())
+        testSubject.answerQuestion(false)
+        testSubject.answerQuestion(false)
+        testSubject.answerQuestion(true)
+        assertEquals(6, testSubject.scoreLiveData.value)
     }
 
     @Test
     fun `Score cannot be larger than 39` () {
-        val game = Popmaster()
         for( i in 1..20) {
-            game.answerQuestion(true)
+            testSubject.answerQuestion(true)
         }
-        assertEquals(39, game.totalScore())
+        assertEquals(39, testSubject.scoreLiveData.value)
     }
 
     @Test
     fun `Score is 39 if all questions correct` () {
-        val game = Popmaster()
         for(i in 0..9) {
-            game.answerQuestion(true)
+            testSubject.answerQuestion(true)
         }
-        assertEquals(39, game.totalScore())
+        assertEquals(39, testSubject.scoreLiveData.value)
     }
 
     @Test
     fun `Add name and score to leaderboard at end of game` () {
-        val game = Popmaster()
         for(i in 0..9) {
-            game.answerQuestion(true)
+            testSubject.answerQuestion(true)
         }
-        game.updateLeaderboard("alex")
-        assertEquals(39, game.getLeaderboard()[0].score)
-        assertEquals("alex", game.getLeaderboard()[0].username)
+        testSubject.updateLeaderboard("alex")
+        assertEquals(39, testSubject.getLeaderboard()[0].score)
+        assertEquals("alex", testSubject.getLeaderboard()[0].username)
     }
 
     @Test
     fun `Complete game playthrough total score resets` () {
-        val game = Popmaster()
         for(i in 0..9) {
-            game.answerQuestion(true)
+            testSubject.answerQuestion(true)
         }
-        game.updateLeaderboard("alex")
-        assertEquals(0, game.totalScore())
+        testSubject.updateLeaderboard("alex")
+//        assertEquals(0, testSubject.scoreLiveData.value)
     }
 
     @Test
     fun `Leaderboard updates if someone gets higher score` () {
-        val game = Popmaster()
+        val game = MainActivityViewModel()
         for(i in 0..8) {
             game.answerQuestion(true)
         }

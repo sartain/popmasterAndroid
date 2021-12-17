@@ -5,25 +5,25 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 
-class Popmaster : ViewModel() {
-    private var liveScoreData: MutableLiveData<Int> = MutableLiveData()
-    private var liveQuestionData: MutableLiveData<Int> = MutableLiveData()
+class MainActivityViewModel : ViewModel() {
+    private var _scoreLiveData: MutableLiveData<Int> = MutableLiveData()
+    private var _questionLiveData: MutableLiveData<Int> = MutableLiveData()
     private val scorecard = Scorecard()
     private var currentQuestion = 1
     private val leaderboard = Leaderboard()
 
     fun loadData() {
-        liveScoreData.value = scorecard.score
-        liveQuestionData.value = 0
+        _scoreLiveData.value = scorecard.score
+        _questionLiveData.value = 0
     }
 
     fun getScore(): LiveData<Int> {
-        return liveScoreData
+        return _scoreLiveData
     }
 
-    fun getQuestionLive(): LiveData<Int> {
-        return liveQuestionData
-    }
+    val questionLiveData: LiveData<Int> = _questionLiveData
+
+    val scoreLiveData: LiveData<Int> = _scoreLiveData
 
     fun totalScore(): Int {
         return scorecard.score
@@ -36,12 +36,12 @@ class Popmaster : ViewModel() {
 
     fun correctAnswer() {
         scorecard.updateCorrectAnswer(currentQuestion)
-        liveScoreData.value = scorecard.score
+        _scoreLiveData.value = scorecard.score
     }
 
     fun moveToNextQuestion() {
         currentQuestion += 1
-        liveQuestionData.value = currentQuestion
+        _questionLiveData.value = currentQuestion
     }
 
     fun answerQuestion(correct: Boolean) {

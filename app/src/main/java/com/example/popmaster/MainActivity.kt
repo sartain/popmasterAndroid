@@ -9,9 +9,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
-        val viewModel : Popmaster by viewModels()
+        val viewModel : MainActivityViewModel by viewModels()
         viewModel.loadData()
-        viewModel.getQuestionLive().observe(this, {
+        viewModel.questionLiveData.observe(this, {
             questionNumber -> binding.question.text = "Question: $questionNumber"
         })
         viewModel.getScore().observe(this, {
@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
-    private fun questionListener(binding: ActivityMainBinding, viewModel : Popmaster) {
+    private fun questionListener(binding: ActivityMainBinding, viewModel : MainActivityViewModel) {
         binding.correctButton.setOnClickListener {
             viewModel.answerQuestion(true)
         }
