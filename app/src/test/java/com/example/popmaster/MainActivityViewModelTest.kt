@@ -96,6 +96,15 @@ class MainActivityViewModelTest {
     }
 
     @Test
+    fun `Answer 10 questions cannot answer correct any more` () {
+        for(i in 0..9) {
+            testSubject.answerQuestion(false)
+        }
+        testSubject.answerQuestion(true)
+        assertEquals(mutableListOf(0, 10), testSubject.screenInfoLiveData.value)
+    }
+
+    @Test
     fun `Leaderboard updates if someone gets higher score` () {
         val game = MainActivityViewModel()
         for(i in 0..8) {

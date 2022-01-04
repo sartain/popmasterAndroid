@@ -14,6 +14,7 @@ class MainActivityViewModel : ViewModel() {
     private var currentQuestion = 1
     private val leaderboard = Leaderboard()
     private var _screenInfoLiveData: MutableLiveData<MutableList<Int>> = MutableLiveData<MutableList<Int>>()
+    private var gameOver = false
 
     fun loadData() {
         _screenInfoLiveData.value = mutableListOf(totalScore(), currentQuestion)
@@ -41,18 +42,22 @@ class MainActivityViewModel : ViewModel() {
 
     private fun moveToNextQuestion() {
         currentQuestion += 1
+        if(currentQuestion > 10) {
+            gameOver = true
+            currentQuestion = 10
+        }
     }
 
     fun answerQuestion(correct: Boolean) {
-        if(currentQuestion <= maxQuestions) {
+        if(!gameOver) {
             if (correct)
                 updateScoreWithCorrectAnswer()
-            if(currentQuestion != maxQuestions)
-               moveToNextQuestion()
+            moveToNextQuestion()
         }
         updateScreenInfoLiveData()
     }
     private fun reset() {
+        gameOver = false
         if(currentQuestion > maxQuestions) {
             scorecard.reset()
         }
