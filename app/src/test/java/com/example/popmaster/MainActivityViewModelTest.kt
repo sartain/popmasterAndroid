@@ -31,14 +31,14 @@ ToDo
 
 class MainActivityViewModelTest {
     val testSubject = MainActivityViewModel()
-    private val observer: Observer<Int> =
+    private val observer: Observer<MutableList<Int>> =
         mockk(relaxed = true)
 
     @Rule @JvmField
     var instantExecutorRule = InstantTaskExecutorRule()
     @Before
     fun setupTest() {
-        testSubject.questionLiveData.observeForever(observer)
+        testSubject.screenInfoLiveData.observeForever(observer)
     }
 
     @Test
@@ -49,7 +49,7 @@ class MainActivityViewModelTest {
     @Test
     fun `Score increased by 3 for correct answer` () {
         testSubject.answerQuestion(true)
-        assertEquals(3, testSubject.scoreLiveData.value)
+        assertEquals(mutableListOf(3, 2), testSubject.screenInfoLiveData.value)
     }
 
     @Test
@@ -57,7 +57,7 @@ class MainActivityViewModelTest {
         testSubject.answerQuestion(false)
         testSubject.answerQuestion(false)
         testSubject.answerQuestion(true)
-        assertEquals(6, testSubject.scoreLiveData.value)
+        assertEquals(mutableListOf(6, 4), testSubject.screenInfoLiveData.value)
     }
 
     @Test
@@ -65,7 +65,7 @@ class MainActivityViewModelTest {
         for( i in 1..20) {
             testSubject.answerQuestion(true)
         }
-        assertEquals(39, testSubject.scoreLiveData.value)
+        assertEquals(mutableListOf(39, 10), testSubject.screenInfoLiveData.value)
     }
 
     @Test
@@ -73,7 +73,7 @@ class MainActivityViewModelTest {
         for(i in 0..9) {
             testSubject.answerQuestion(true)
         }
-        assertEquals(39, testSubject.scoreLiveData.value)
+        assertEquals(mutableListOf(39, 10), testSubject.screenInfoLiveData.value)
     }
 
     @Test
@@ -92,7 +92,7 @@ class MainActivityViewModelTest {
             testSubject.answerQuestion(true)
         }
         testSubject.updateLeaderboard("alex")
-//        assertEquals(0, testSubject.scoreLiveData.value)
+       //assertEquals(mutableListOf(39, 10), testSubject.screenInfoLiveData.value)
     }
 
     @Test

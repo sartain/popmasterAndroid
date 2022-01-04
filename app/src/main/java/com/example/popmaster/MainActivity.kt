@@ -11,11 +11,8 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         val viewModel : MainActivityViewModel by viewModels()
         viewModel.loadData()
-        viewModel.questionLiveData.observe(this, {
-            questionNumber -> binding.question.text = "Question: $questionNumber"
-        })
-        viewModel.getScore().observe(this, {
-            score -> binding.score.text = "Score: $score"
+        viewModel.screenInfoLiveData.observe(this, { score -> binding.score.text = "Score: " + score.get(0).toString()
+            binding.question.text = "Question: " + score.get(1).toString()
         })
         binding.correctButton.text = getString(R.string.correct)
         binding.incorrectButton.text = getString(R.string.incorrect)

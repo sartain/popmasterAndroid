@@ -6,24 +6,16 @@ import androidx.lifecycle.ViewModel
 
 
 class MainActivityViewModel : ViewModel() {
-    private var _scoreLiveData: MutableLiveData<Int> = MutableLiveData()
-    private var _questionLiveData: MutableLiveData<Int> = MutableLiveData()
     private val scorecard = Scorecard()
     private var currentQuestion = 1
     private val leaderboard = Leaderboard()
+    private var _screenInfoLiveData: MutableLiveData<MutableList<Int>> = MutableLiveData<MutableList<Int>>()
 
     fun loadData() {
-        _scoreLiveData.value = scorecard.score
-        _questionLiveData.value = 0
+        _screenInfoLiveData.value = mutableListOf(totalScore(), currentQuestion)
     }
 
-    fun getScore(): LiveData<Int> {
-        return _scoreLiveData
-    }
-
-    val questionLiveData: LiveData<Int> = _questionLiveData
-
-    val scoreLiveData: LiveData<Int> = _scoreLiveData
+    var screenInfoLiveData = _screenInfoLiveData
 
     fun totalScore(): Int {
         return scorecard.score
@@ -36,12 +28,15 @@ class MainActivityViewModel : ViewModel() {
 
     fun correctAnswer() {
         scorecard.updateCorrectAnswer(currentQuestion)
-        _scoreLiveData.value = scorecard.score
+    }
+
+    fun updateScreenInfoLiveData() {
+        val updatedList = mutableListOf<Int>(scorecard.score, currentQuestion)
+        _screenInfoLiveData.value = updatedList
     }
 
     fun moveToNextQuestion() {
         currentQuestion += 1
-        _questionLiveData.value = currentQuestion
     }
 
     fun answerQuestion(correct: Boolean) {
@@ -51,6 +46,7 @@ class MainActivityViewModel : ViewModel() {
             if(currentQuestion != 10)
                moveToNextQuestion()
         }
+        updateScreenInfoLiveData()
     }
     private fun reset() {
         if(currentQuestion > 10) {
