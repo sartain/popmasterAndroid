@@ -1,6 +1,5 @@
 package com.example.popmaster
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
@@ -31,7 +30,7 @@ class MainActivityViewModel : ViewModel() {
         reset()
     }
 
-    fun correctAnswer() {
+    fun updateScoreWithCorrectAnswer() {
         scorecard.updateCorrectAnswer(currentQuestion)
     }
 
@@ -47,7 +46,7 @@ class MainActivityViewModel : ViewModel() {
     fun answerQuestion(correct: Boolean) {
         if(currentQuestion <= maxQuestions) {
             if (correct)
-                correctAnswer()
+                updateScoreWithCorrectAnswer()
             if(currentQuestion != maxQuestions)
                moveToNextQuestion()
         }
