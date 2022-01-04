@@ -30,16 +30,16 @@ class MainActivityViewModel : ViewModel() {
         reset()
     }
 
-    fun updateScoreWithCorrectAnswer() {
+    private fun updateScoreWithCorrectAnswer() {
         scorecard.updateCorrectAnswer(currentQuestion)
     }
 
-    fun updateScreenInfoLiveData() {
+    private fun updateScreenInfoLiveData() {
         val updatedList = mutableListOf<Int>(scorecard.score, currentQuestion)
         _screenInfoLiveData.value = updatedList
     }
 
-    fun moveToNextQuestion() {
+    private fun moveToNextQuestion() {
         currentQuestion += 1
     }
 
