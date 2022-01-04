@@ -4,6 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
+enum class ScreenInfo (val index : Int) {
+    SCORE(0),
+    QUESTION(1)
+}
 
 class MainActivityViewModel : ViewModel() {
     private val scorecard = Scorecard()
