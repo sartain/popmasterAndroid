@@ -12,10 +12,8 @@ class MainActivity : AppCompatActivity() {
         val viewModel : MainActivityViewModel by viewModels()
         viewModel.loadData()
         viewModel.screenInfoLiveData.observe(this, { score ->
-            val scoreNum = score[ScreenInfo.SCORE.index]
-            val questionNum = score[ScreenInfo.QUESTION.index]
-            binding.score.text = "Score: $scoreNum"
-            binding.question.text = "Question: $questionNum"
+            binding.score.text = getString(R.string.score, score[ScreenInfo.SCORE.index])
+            binding.question.text = getString(R.string.question, score[ScreenInfo.QUESTION.index])
         })
         binding.correctButton.text = getString(R.string.correct)
         binding.incorrectButton.text = getString(R.string.incorrect)
