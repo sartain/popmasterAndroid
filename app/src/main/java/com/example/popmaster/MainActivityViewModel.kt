@@ -10,6 +10,7 @@ enum class ScreenInfo (val index : Int) {
 }
 
 class MainActivityViewModel : ViewModel() {
+    private val maxQuestions = 10
     private val scorecard = Scorecard()
     private var currentQuestion = 1
     private val leaderboard = Leaderboard()
@@ -44,16 +45,16 @@ class MainActivityViewModel : ViewModel() {
     }
 
     fun answerQuestion(correct: Boolean) {
-        if(currentQuestion <= 10) {
+        if(currentQuestion <= maxQuestions) {
             if (correct)
                 correctAnswer()
-            if(currentQuestion != 10)
+            if(currentQuestion != maxQuestions)
                moveToNextQuestion()
         }
         updateScreenInfoLiveData()
     }
     private fun reset() {
-        if(currentQuestion > 10) {
+        if(currentQuestion > maxQuestions) {
             scorecard.reset()
         }
         currentQuestion = 1
